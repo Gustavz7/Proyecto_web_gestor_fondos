@@ -9,7 +9,7 @@
         "prod": "npm run production",
         "production": "mix --production"
     },
-    "devDep:endencies": {
+    "devDependencies": {
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
         "jquery": "^3.6",
