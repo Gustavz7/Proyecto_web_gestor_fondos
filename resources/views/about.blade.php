@@ -1,3 +1,4 @@
-<div class="container">
-    <example-component></example-component>
-</div>
+@extends('layouts.app')
+@section('content')
+    <about-component></about-component>
+@endsection
