@@ -4,17 +4,15 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-
 import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 require('./bootstrap');
 
 window.Vue = require('vue').default;
-
-Vue.use(Vuetify)
+Vue.use(BootstrapVue)
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,10 +22,10 @@ Vue.use(Vuetify)
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-//const files = require.context('./', true, /\.vue$/i)
-//files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-//Vue.component('example-component',  require('./components/ExampleComponent.vue').default);
+
 Vue.component('about-component', require('./components/about/aboutComponent').default);
 Vue.component('cards-component', require('./components/CardsComponent').default);
 Vue.component('home-component', require('./components/HomeComponent').default);
@@ -41,8 +39,5 @@ Vue.component('home-component', require('./components/HomeComponent').default);
 const app = new Vue(
     {
         el: '#app',
-        //  Definicion de el uso de la dependencia Vuetify
-
-        vuetify: new Vuetify(),
 });
 

@@ -1,7 +1,7 @@
 <template>
 <div>
     <h1>Gustavo Alexis Millanao Rain</h1>
-    <v-btn>hola</v-btn>
+
 </div>
 </template>
 
