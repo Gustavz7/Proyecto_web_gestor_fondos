@@ -10,13 +10,6 @@ export default {
     name: "aboutComponent",
 
 }
-new Vue ({
-    el:'#app',
-
-    data:{
-
-    }
-})
 </script>
 
 <style scoped>

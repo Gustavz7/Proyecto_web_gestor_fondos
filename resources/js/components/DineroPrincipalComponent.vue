@@ -1,15 +1,21 @@
 <template>
     <div>
-        <b-card
-        align="center">
-            <b-card-text
-                class="texto_dinero_principal"> {{info_dinero}} </b-card-text>
-        </b-card>
+        <b-button @click="error_A">Test</b-button>
 
-        <li>
-            <ol v-for="item in info_dinero"> item.id</ol>
-        </li>
+        <b-container>
+            <b-card v-if="error_estado == true" align="center">
+                <b-card-text class="texto_dinero_principal">
+                    {{ info_dinero.moneda_principal }} {{ info_dinero.monto_principal }}
+                </b-card-text>
+            </b-card>
 
+            <b-card v-if="error_estado == false" align="center">
+                <b-card-text class="error_dinero_principal">
+                    no se pudo cargar la información
+                </b-card-text>
+                <b-button @click="reintentar" variant="primary">Reintentar</b-button>
+            </b-card>
+        </b-container>
 
     </div>
 </template>
@@ -17,19 +23,28 @@
 <script>
 export default {
     name: "DineroPrincipalComponent",
-    data(){
+    mounted(){
+            axios.get('/dinero_principal').then((response) => {
+            this.info_dinero = response.data[0];
+            });
+
+    },
+    data: () => {
         return{
-            moneda_principal:"",
-            dinero_principal: "1.654.050",
-            info_dinero: null,
+            info_dinero: [],
+            error_estado: true
         }
     },
-    mounted(){
-        axios.get('/dinero_principal').then((response) => {
-            this.info_dinero = [];
-            this.info_dinero = response.data[0];
-            console.log(this.info_dinero);
-        });
+    methods:{
+        reintentar(){
+            console.log("reintentado conexion xd")
+        },
+        error_A(){
+            this.error_estado = !this.error_estado;
+        }
+    },
+    computed:{
+
     }
 }
 </script>
@@ -37,7 +52,11 @@ export default {
 <style scoped>
 .texto_dinero_principal {
     font-weight: bold;
-    font-size: 60px
+    font-size: 60px;
+}
+.error_dinero_principal{
+    font-weight: bold;
+    font-size: 30px;
 }
 </style>
 
