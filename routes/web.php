@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::view('/about', 'about');
+Route::view('/perfil', 'perfil_usuario');
 
 Auth::routes();
 
