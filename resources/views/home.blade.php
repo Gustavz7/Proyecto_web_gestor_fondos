@@ -1,66 +1,106 @@
 @extends('layouts.app2')
 
 @section('content')
-    <div>
+    <div class="VueComponent-space">
         <home-component></home-component>
     </div>
-
-    <footer class="text-center text-lg-start bg-dark text-muted">
-
-        <section>
-            <div>
-                <a href="https://twitter.com/?lang=es">
-                    <i class="fab fa-facebook-f">Twitter</i>
-                </a>
-                <a href="https://facebook.com/">
-                    <i class="fab fa-twitter">Facebook</i>
-                </a>
-                <a href="https://youtube.com/">
-                    <i class="fab fa-twitter">YouTube</i>
-                </a>
-                <a href="https://instagram.com/">
-                    <i class="fab fa-twitter">Instagram</i>
+    <div class="pt-5 justify-content-center bg-dark text-white">
+        <!-- iconos de rrss -->
+        <div class="row m-4 justify-content-center">
+            <div class="col-auto">
+                <a class="icon_link" href="https://twitter.com/" target="_blank">
+                    <i class="fab fa-twitter-square fa-3x"></i>
                 </a>
             </div>
-        </section>
-
-        <section>
-            <div class="container text-center text-md-start mt-5">
-
-                <div class="row mt-3">
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Finalidad
-                        </h6>
-                        <p>
-                            Gestor de fondos v1.0: ¡Registra tus gastos y lleva un seguimiento de tu dinero!
-                        </p>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Contacto
-                        </h6>
-                        <p><i class="fas fa-home me-3"></i> CFT TWK TEMUCO, ARAUCANIA CHILE</p>
-                        <p>
-                            <i class="fas fa-envelope me-3"></i>
-                            guz.developer@gmail.com
-                        </p>
-                        <p>
-                            <i class="fas fa-envelope me-3"></i>
-                            github.com/Gustavz7
-                        </p>
-
-                    </div>
-                </div>
+            <div class="col-auto">
+                <a class="icon_link" href="https://facebook.com/" target="_blank">
+                    <i class="fab fa-facebook-square fa-3x"></i>
+                </a>
             </div>
-        </section>
-
-        <div class="text-center p-4">
-            © 2021 Copyright:
-            <a class="text-reset fw-bold" href="">example.com</a>
+            <div class="col-auto">
+                <a class="icon_link" href="https://instagram.com/" target="_blank">
+                    <i class="fab fa-instagram-square fa-3x"></i>
+                </a>
+            </div>
+            <div class="col-auto">
+                <a class="icon_link" href="https://github.com/Gustavz7" target="_blank">
+                    <i class="fab fa-github-square fa-3x"></i>
+                </a>
+            </div>
         </div>
-    </footer>
+        <!-- Contacto y descripcion -->
+        <div class="row justify-content-center pt-5 pl-5 pr-5">
 
+            <div class="col-auto">
+                <h6 class="text-uppercase fw-bold mb-4">Finalidad</h6>
+                <p>Gestor de fondos v1.0: ¡Registra tus gastos y lleva un seguimiento de tu dinero!</p>
+            </div>
+
+            <div class="col-auto">
+                <h6 class="text-uppercase fw-bold  mb-4">
+                    Contacto
+                </h6>
+                <p><i class="fas fa-home me-3"></i> CFT TWK TEMUCO, ARAUCANIA CHILE</p>
+                <p>
+                    <i class="fas fa-envelope me-3"></i>
+                    guz.developer@gmail.com
+                </p>
+                <p>
+                    <i class="fas fa-envelope me-3"></i>
+                    github.com/Gustavz7
+                </p>
+
+            </div>
+        </div>
+        <footer>
+            <div class="text-center p-4">
+                © 2021 Copyright:
+                <a class="text-reset fw-bold" href="">GuzDev</a>
+            </div>
+        </footer>
+
+    </div>
 @endsection
+
+<script>
+
+</script>
+
+<style scoped>
+    a {
+        text-decoration: none;
+        margin-top: 10px;
+        color: #ffffff;
+
+    }
+
+    a:link {
+        color: #ffffff;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: #ffffff;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #ffffff;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:active {
+        color: #ffffff;
+        background-color: transparent;
+        text-decoration: none;
+    }
+    .VueComponent-space{
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+</style>
+
+

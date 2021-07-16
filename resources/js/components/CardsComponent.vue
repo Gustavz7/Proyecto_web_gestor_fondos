@@ -1,13 +1,24 @@
 <template>
-    <b-card>cards componente</b-card>
+    <div class="row justify-content-center">
+
+        <CardAgregarDinero class="col-auto"/>
+        <CardRetirarDinero class="col-auto"/>
+        <CardEstadisticas class="col-auto"/>
+        <CardEmpty class="col-auto"/>
+
+    </div>
 </template>
 
 <script>
+import CardEstadisticas from "./cardsModule/Card-estadisticas";
+import CardEmpty from "./cardsModule/Card-Empty";
+import CardAgregarDinero from "./cardsModule/Card-agregarDinero";
+import CardRetirarDinero from "./cardsModule/Card-RetirarDinero";
 export default {
     name: "cardsComponent",
-
-    data(){
-        return{
+    components: {CardRetirarDinero, CardAgregarDinero, CardEmpty, CardEstadisticas},
+    data() {
+        return {
 
         }
     }
@@ -16,5 +27,6 @@ export default {
 </script>
 
 <style scoped>
+
 
 </style>

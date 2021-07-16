@@ -1,12 +1,15 @@
 <template>
     <div>
-
-        <DineroPrincipalComponent/>
-        <!--
-        <DineroMonedasComponent/>
-        <cards-component/>
-        <historial-component/>
-        -->
+        <div class="row justify-content-center">
+            <DineroPrincipalComponent class="col-auto"/>
+            <DineroMonedasComponent class="col-auto"/>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <cards-component/>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <historial-component/>
+        </div>
     </div>
 </template>
 

@@ -1,5 +1,7 @@
 <template>
-    <b-card>Historial componente</b-card>
+    <div class="col-auto">
+        <h1>soy el historial</h1>
+    </div>
 </template>
 
 <script>

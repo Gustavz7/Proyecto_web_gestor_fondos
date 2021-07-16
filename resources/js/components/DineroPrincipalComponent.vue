@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-button @click="error_A">Test</b-button>
+        <!-- <b-button @click="error_A">Test</b-button> -->
 
         <b-container>
             <b-card v-if="error_estado == true" align="center">
