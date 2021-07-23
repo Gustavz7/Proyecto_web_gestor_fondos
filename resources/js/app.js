@@ -9,6 +9,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -26,9 +27,27 @@ const files = require.context('./', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
+//home & principal navegation
 Vue.component('about-component', require('./components/about/aboutComponent').default);
-Vue.component('cards-component', require('./components/CardsComponent').default);
 Vue.component('home-component', require('./components/HomeComponent').default);
+Vue.component('dards-Component', require('./components/CardsComponent').default);
+
+Vue.component('dineroMonedas-component', require('./components/DineroMonedasComponent').default);
+Vue.component('dineroPrincipal-component', require('./components/DineroPrincipalComponent').default);
+Vue.component('historial-component', require('./components/HistorialComponent').default);
+
+
+//cards
+Vue.component('card-agregarDinero', require('./components/cardsModule/Card-agregarDinero').default);
+Vue.component('card-retirarDinero', require('./components/cardsModule/Card-RetirarDinero').default);
+Vue.component('card-estadisticas', require('./components/cardsModule/Card-estadisticas').default);
+Vue.component('card-Empty', require('./components/cardsModule/Card-Empty').default);
+
+//charts
+Vue.component('estadisticasChart', require('./components/charts/estadisticasChart').default);
+Vue.component('Chart', require('./components/charts/Chart').default);
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DineroPrincipalController;
+use App\Http\Controllers\EstadisticasConfigController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//recursos para API
 Route::resource('/dinero_principal', DineroPrincipalController::class);
+Route::resource('/estadisticas', EstadisticasConfigController::class);
+

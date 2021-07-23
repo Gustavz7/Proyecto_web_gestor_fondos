@@ -18,7 +18,7 @@ class CreateMovimientosTable extends Migration
             $table->double('monto', 20, 4);
             $table->string('titulo', 45);
             $table->string('descripcion', 255);
-            $table->binary('imagen');
+            $table->binary('imagen')->nullable();
             $table->boolean('tipo_movimiento');
             $table->boolean('editado');
             $table->integer('dinero_principal_id')->nullable();
