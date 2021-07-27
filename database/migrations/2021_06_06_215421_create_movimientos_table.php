@@ -15,7 +15,7 @@ class CreateMovimientosTable extends Migration
     {
         Schema::create('movimientos', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->double('monto', 20, 4);
+            $table->bigInteger('monto');
             $table->string('titulo', 45);
             $table->string('descripcion', 255);
             $table->binary('imagen')->nullable();

@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Models\estadisticas_config;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EstadisticasConfigController extends Controller
 {
     public function index()
     {
-        return estadisticas_config::all();
+        //return estadisticas_config::all();
+
+        $posts = DB::select('SELECT monto FROM movimientos');
+        return $posts;
+
     }
     public function create()
     {

@@ -1,16 +1,18 @@
+
 <script>
 import {Line} from 'vue-chartjs'
 
 export default {
     extends: Line,
+    props: ['info_est', 'dat_fecha'],
     data() {
         return {
+            //Data del componenete
+
+
+            //Config Grafico
             datacollection: {
-                labels: ['01 ago', '02 ago', '03 ago',
-                    '04 ago', '05 ago', '06 ago',
-                    '07 ago', '08 ago', '09 ago',
-                    '10 ago', '11 ago', '12 ago',
-                    '13 ago', '14 ago', '15 ago'
+                labels: ['1'
                 ],
                 datasets: [
                     {
@@ -50,7 +52,7 @@ export default {
                     position: 'bottom'
 
                 },
-                title:{
+                title: {
                     display: true,
                     text: '',
                     position: 'top',
@@ -59,16 +61,13 @@ export default {
                 responsive: false,
                 aspectRatio: 0,
                 maintainAspectRatio: false,
-                layout:{
-
-                },
+                layout: {},
             },
-
         }
     },
-    mounted() {
-        this.renderChart(this.datacollection, this.options)
-    }
+    async mounted() {
+        this.renderChart(this.datacollection, this.options);
+    },
 }
 </script>
 <style scoped>

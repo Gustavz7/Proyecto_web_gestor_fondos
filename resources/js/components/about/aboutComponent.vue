@@ -6,14 +6,19 @@
     <Chart></Chart>
     chart en .cont
     <estadisticas-chart></estadisticas-chart>
-
 </div>
 </template>
 
 <script>
 export default {
     name: "aboutComponent",
+    data: () => ({
 
+    }),
+    mounted() {
+
+
+    }
 }
 </script>
 

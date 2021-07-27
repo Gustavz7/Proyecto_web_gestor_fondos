@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class movimientos extends Model
 {
     use HasFactory;
+
 }

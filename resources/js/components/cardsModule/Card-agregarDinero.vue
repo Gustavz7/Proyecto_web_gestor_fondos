@@ -14,6 +14,8 @@
             body-class="text-center">
             <b-card-text>Carta disponible para una futura funcionalidad?</b-card-text>
             <b-button class="text-dark" href="#" variant="outline-warning"> Bloqueado </b-button>
+
+
         </b-card>
     </div>
 </template>

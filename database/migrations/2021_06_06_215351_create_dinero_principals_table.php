@@ -15,9 +15,9 @@ class CreateDineroPrincipalsTable extends Migration
     {
         Schema::create('dinero_principals', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->decimal('monto_principal', 20, 4);
+            $table->bigInteger('monto_principal');
             $table->string('moneda_principal', 50);
-            $table->double('precio_moneda_principal', 8, 2);
+            $table->integer('precio_moneda_principal');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

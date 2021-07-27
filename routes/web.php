@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DineroPrincipalController;
 use App\Http\Controllers\EstadisticasConfigController;
-
+use App\Http\Controllers\fechaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +26,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//recursos para API
+
+
+/**
+ * recursos para API
+ **/
 Route::resource('/dinero_principal', DineroPrincipalController::class);
+//return monto movimientos
 Route::resource('/estadisticas', EstadisticasConfigController::class);
+//return fechas
+Route::resource('/fecha_actual', fechaController::class);
 
