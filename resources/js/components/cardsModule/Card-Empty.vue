@@ -12,7 +12,7 @@
             img-height="230px"
             class="mb-2"
             body-class="text-center">
-            <b-card-text>Carta disponible para una futura funcionalidad?</b-card-text>
+            <b-card-text>New functionality coming soon</b-card-text>
             <b-button class="text-dark" href="#" variant="outline-warning"> Bloqueado </b-button>
         </b-card>
     </div>

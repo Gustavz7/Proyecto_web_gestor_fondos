@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DineroPrincipalController;
 use App\Http\Controllers\EstadisticasConfigController;
 use App\Http\Controllers\fechaController;
+use App\Http\Controllers\MovimientosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,4 +37,9 @@ Route::resource('/dinero_principal', DineroPrincipalController::class);
 Route::resource('/estadisticas', EstadisticasConfigController::class);
 //return fechas
 Route::resource('/fecha_actual', fechaController::class);
+
+
+//Recepcion de datos
+Route::resource('/add_movimiento', MovimientosController::class);
+
 

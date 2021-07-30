@@ -12,8 +12,8 @@
             img-height="230px"
             class="mb-2"
             body-class="text-center">
-            <b-card-text>Retirar una cantidad de dinero desde tu fondo principal</b-card-text>
-            <b-button class="text-dark" href="#" variant="outline-warning"
+            <b-card-text> {{card_subTitle}}</b-card-text>
+            <b-button class="text-dark" href="#" variant="outline-danger"
                       @click="modalShow = !modalShow"> Retirar Dinero
             </b-button>
         </b-card>
@@ -22,18 +22,19 @@
                  v-model="modalShow"
                  size="lg"
                  centered
-
                  cancel-title="cancelar retiro"
                  cancel-variant="danger"
-
                  ok-title="retirar dinero"
                  ok-variant="success"
+                 @cancel="limpiar_form_retiro"
+                 @ok="crear_store_movimiento"
+
         >
             <b-form>
                 <b-row>
                     <b-col>
                         <b-form-group id="monto"
-                                      label="ingresa el monto"
+                                      label="ingresa el monto a retirar"
                                       label-for="input-monto"
                                       description="">
                             <b-form-input
@@ -104,6 +105,13 @@
                         </b-form-group>
                     </b-col>
                 </b-row>
+
+                <!-- debug
+                <p>$: {{ monto }} </p><br>
+                <p>title: {{ titulo }} </p><br>
+                <p>desc: {{ descripcion}} </p><br>
+                <p>img: {{ imagen}} </p><br>
+                -->
             </b-form>
         </b-modal>
     </div>
@@ -114,6 +122,8 @@ export default {
     name: "Card-RetirarDinero",
     data() {
         return {
+            //card-config
+            card_subTitle: "Te permite retirar una cantidad de dinero desde tu fondo principal",
 
             //Datos usados Card & form
             modalShow: false,
@@ -125,22 +135,53 @@ export default {
             monto: null,
             descripcion: '',
             imagen: null,
+            tipo_movimiento: false,
+            editado: false
         }
     },
     methods: {
-
+        //encapsulamiento de los datos y envio con axios post
+        crear_store_movimiento() {
+            const info_movimiento = {
+                monto_front: this.monto,
+                titulo_front: this.titulo,
+                descripcion_front: this.descripcion,
+                imagen_front: this.imagen,
+                tipo_movimiento_front: this.tipo_movimiento,
+                editado_front: this.editado
+            };
+            axios.post('/add_movimiento', info_movimiento).then((response) => {
+                //const info_recibida = response.data;
+                console.log(response.data);
+                //this.$emit('addinfo', info_recibida);
+            });
+            this.titulo = '';
+            this.monto = null;
+            this.descripcion = '';
+            this.imagen = null;
+        },
+        limpiar_form_retiro() {
+            this.titulo = '';
+            this.monto = null;
+            this.descripcion = '';
+            this.imagen = null;
+        }
     },
     computed: {
+        //validacion de la cantidad de caracteres de el campo titulo del formulario
         titulo_estado() {
-            return this.titulo.length > 2 ? true : false
+            if (this.titulo.length < 10) {
+                return false;
+            }
         },
+
+        //validacion del campo monto del formulario
         monto_estado() {
             if (this.monto < 0 || this.monto == 0 || this.monto == null) {
                 return this.show_retirar_dinero_btn = false
             } else {
                 return this.show_retirar_dinero_btn = true
             }
-
         }
     }
 }
