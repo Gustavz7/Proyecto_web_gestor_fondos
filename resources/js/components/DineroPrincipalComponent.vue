@@ -1,51 +1,65 @@
 <template>
     <div>
-        <!-- <b-button @click="error_A">Test</b-button> -->
+        <!-- esta tarjeta se mostrara si no hay errores en la request axios -->
+        <b-card v-if="error" align="center">
+            <b-card-text class="error_dinero_principal">
+                Error al cargar la información
+            </b-card-text>
+            <b-button @click="api_request_monto" variant="primary">
+                Reintentar
+                <b-icon
+                    icon="arrow-clockwise"
+                    variant="light">
+                </b-icon>
+            </b-button>
+        </b-card>
 
-        <b-container>
-            <b-card v-if="error_estado == true" align="center">
+        <!-- esta tarjeta se mostrara si hay errores en la request axios -->
+        <b-card v-else align="center">
+            <b-overlay :show="loading" rounded="sm">
                 <b-card-text class="texto_dinero_principal">
                     {{ info_dinero.moneda_principal }} {{ info_dinero.monto_principal }}
                 </b-card-text>
-            </b-card>
-
-            <b-card v-if="error_estado == false" align="center">
-                <b-card-text class="error_dinero_principal">
-                    no se pudo cargar la información
-                </b-card-text>
-                <b-button @click="reintentar" variant="primary">Reintentar</b-button>
-            </b-card>
-        </b-container>
-
+            </b-overlay>
+        </b-card>
     </div>
 </template>
 
 <script>
 export default {
     name: "DineroPrincipalComponent",
-    mounted(){
-            axios.get('/dinero_principal').then((response) => {
-            this.info_dinero = response.data[0];
-            });
-
-    },
     data: () => {
-        return{
+        return {
             info_dinero: [],
-            error_estado: true
+            error_estado: false,
+            loading: false,
+            error: false,
+            retry_btn: false,
         }
     },
-    methods:{
-        reintentar(){
-            console.log("reintentado conexion xd")
-        },
-        error_A(){
-            this.error_estado = !this.error_estado;
+    mounted() {
+        this.api_request_monto();
+    },
+    methods: {
+        api_request_monto() {
+            axios
+                .get('/dinero_principal')
+                .then((response) => {
+                    this.loading = true;
+                    this.error = false;
+                    this.info_dinero = response.data[0];
+                })
+                .catch(error => {
+                    //console.log(error);
+                    this.error = true;
+                    this.retry_btn = true;
+                })
+                .finally(() => {
+                    this.loading = false;
+                })
         }
     },
-    computed:{
-
-    }
+    computed: {}
 }
 </script>
 
@@ -54,7 +68,8 @@ export default {
     font-weight: bold;
     font-size: 60px;
 }
-.error_dinero_principal{
+
+.error_dinero_principal {
     font-weight: bold;
     font-size: 30px;
 }

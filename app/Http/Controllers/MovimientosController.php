@@ -11,7 +11,7 @@ class MovimientosController extends Controller
     public function index()
     {
         //devolver todos los datos de la tabla descripcion_infos a traves de su modelo
-        //return descripcion_infos::all();
+        return movimientos::all();
     }
 
     public function create()

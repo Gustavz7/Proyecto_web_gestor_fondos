@@ -15,8 +15,6 @@ class fechaController extends Controller
     public function index()
     {
         //
-        $fecha = DB::select('select created_at from movimientos');
-        return $fecha;
     }
 
     /**
@@ -27,6 +25,7 @@ class fechaController extends Controller
     public function create()
     {
         //
+        return null;
     }
 
     /**

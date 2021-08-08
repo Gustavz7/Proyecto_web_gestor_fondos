@@ -67,6 +67,7 @@
 </script>
 
 <style scoped>
+    /*
     a {
         text-decoration: none;
         margin-top: 10px;
@@ -96,7 +97,7 @@
         color: #ffffff;
         background-color: transparent;
         text-decoration: none;
-    }
+    }*/
     .VueComponent-space{
         margin-top: 50px;
         margin-bottom: 50px;

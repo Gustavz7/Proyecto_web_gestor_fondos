@@ -31,11 +31,13 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 //home & principal navegation
 Vue.component('about-component', require('./components/about/aboutComponent').default);
 Vue.component('home-component', require('./components/HomeComponent').default);
-Vue.component('dards-Component', require('./components/CardsComponent').default);
+Vue.component('cards-Component', require('./components/CardsComponent').default);
 
 Vue.component('dineroMonedas-component', require('./components/DineroMonedasComponent').default);
 Vue.component('dineroPrincipal-component', require('./components/DineroPrincipalComponent').default);
 Vue.component('historial-component', require('./components/HistorialComponent').default);
+//historial detalles
+Vue.component('detallesMov-component', require('./components/Historial_detalles_movimientos/detalles_movComponent').default);
 
 
 //cards

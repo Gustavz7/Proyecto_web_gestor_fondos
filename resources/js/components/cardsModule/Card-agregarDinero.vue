@@ -1,22 +1,27 @@
 <template>
-    <div>
-        <b-card
-            bg-variant="light"
-            text-variant="dark"
-            title=""
-            style="width: 16rem; height: 25rem;"
-            img-src="https://i.postimg.cc/fRN7t5YP/depositar.png"
-            img-top
-            img-alt="Card image"
-            img-width="160px"
-            img-height="230px"
-            class="mb-2"
-            body-class="text-center">
-            <b-card-text>{{ card_subTitle }}</b-card-text>
-            <b-button class="text-dark" href="#" variant="outline-success"
-                      @click="modalShow = !modalShow"> Agregar Dinero
-            </b-button>
-        </b-card>
+    <b-card
+        border-variant="success"
+        bg-variant="light"
+        text-variant="dark"
+        title=""
+        style="
+            max-width: 16rem;
+            max-height: 25rem;
+            min-width: 16rem;
+            min-height: 25rem;"
+        img-src="https://i.postimg.cc/fRN7t5YP/depositar.png"
+        img-top
+        img-alt="Card image"
+        img-width="160px"
+        img-height="230px"
+        class="m-2"
+        body-class="text-center">
+        <b-card-text>{{ card_subTitle }}</b-card-text>
+
+        <!-- Seccion del modal -->
+        <b-button class="text-dark" href="#" variant="outline-success"
+                  @click="modalShow = !modalShow"> Agregar Dinero
+        </b-button>
         <b-modal class="justify-content-center"
                  title="Depositar dinero"
                  v-model="modalShow"
@@ -113,7 +118,8 @@
                 -->
             </b-form>
         </b-modal>
-    </div>
+    </b-card>
+
 </template>
 
 <script>
@@ -134,7 +140,7 @@ export default {
             monto: null,
             descripcion: '',
             imagen: null,
-            tipo_movimiento: true, //#true=Deposito #False=Retiro
+            tipo_movimiento: true, //#true(1)=Deposito #False(0)=Retiro
             editado: false
         }
     },
@@ -158,7 +164,7 @@ export default {
             this.descripcion = '';
             this.imagen = null;
         },
-        limpiar_form_add () {
+        limpiar_form_add() {
             this.titulo = '';
             this.monto = null;
             this.descripcion = '';

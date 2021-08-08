@@ -1,22 +1,25 @@
 <template>
-    <div>
-        <b-card
-            bg-variant="light"
-            text-variant="dark"
-            title=""
-            style="width: 16rem; height: 25rem;"
-            img-src="https://i.postimg.cc/kG26zRKK/retirar.png"
-            img-top
-            img-alt="Card image"
-            img-width="160px"
-            img-height="230px"
-            class="mb-2"
-            body-class="text-center">
-            <b-card-text> {{card_subTitle}}</b-card-text>
-            <b-button class="text-dark" href="#" variant="outline-danger"
-                      @click="modalShow = !modalShow"> Retirar Dinero
-            </b-button>
-        </b-card>
+    <b-card
+        border-variant="danger"
+        bg-variant="light"
+        text-variant="dark"
+        title=""
+        style="
+            max-width: 16rem;
+            max-height: 25rem;
+            min-width: 16rem;
+            min-height: 25rem;"
+        img-src="https://i.postimg.cc/kG26zRKK/retirar.png"
+        img-top
+        img-alt="Card image"
+        img-width="160px"
+        img-height="230px"
+        class="m-2"
+        body-class="text-center">
+        <b-card-text> {{card_subTitle}}</b-card-text>
+        <b-button class="text-dark" href="#" variant="outline-danger"
+                  @click="modalShow = !modalShow"> Retirar Dinero
+        </b-button>
         <b-modal class="justify-content-center"
                  title="Retirar dinero"
                  v-model="modalShow"
@@ -105,16 +108,10 @@
                         </b-form-group>
                     </b-col>
                 </b-row>
-
-                <!-- debug
-                <p>$: {{ monto }} </p><br>
-                <p>title: {{ titulo }} </p><br>
-                <p>desc: {{ descripcion}} </p><br>
-                <p>img: {{ imagen}} </p><br>
-                -->
             </b-form>
         </b-modal>
-    </div>
+    </b-card>
+
 </template>
 
 <script>

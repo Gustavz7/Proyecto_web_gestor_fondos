@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Models\dinero_principal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DineroPrincipalController extends Controller
 {
     public function index()
     {
-        return dinero_principal::all();
+        $query = "SELECT monto_principal, moneda_principal FROM dinero_principals WHERE ID=1";
+        $fecha = DB::select("$query");
+        return $fecha;
     }
     public function create()
     {
