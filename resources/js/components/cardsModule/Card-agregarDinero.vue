@@ -87,9 +87,7 @@
                                          rows="4"
                                          size="sm"
                                          :state="descripcion.length >= 10"
-                                         required
-
-                        >
+                                         required >
                         </b-form-textarea>
                     </b-col>
                     <b-col>
@@ -104,18 +102,10 @@
                                          placeholder="ingresar imagen"
                                          browse-text="Explorar"
                             ></b-form-file>
-
-
                         </b-form-group>
                     </b-col>
                 </b-row>
 
-                <!-- debug
-                <p>$: {{ monto }} </p><br>
-                <p>title: {{ titulo }} </p><br>
-                <p>desc: {{ descripcion}} </p><br>
-                <p>img: {{ imagen}} </p><br>
-                -->
             </b-form>
         </b-modal>
     </b-card>

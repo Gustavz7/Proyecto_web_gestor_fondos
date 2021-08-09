@@ -38,6 +38,9 @@ Vue.component('dineroPrincipal-component', require('./components/DineroPrincipal
 Vue.component('historial-component', require('./components/HistorialComponent').default);
 //historial detalles
 Vue.component('detallesMov-component', require('./components/Historial_detalles_movimientos/detalles_movComponent').default);
+Vue.component('editar_detalles_mov-component', require('./components/Historial_detalles_movimientos/editar_detalles_mod').default);
+Vue.component('historial_cambios-component', require('./components/Historial_detalles_movimientos/historial_cambios').default);
+Vue.component('ver_detalles_cambio-component', require('./components/Historial_detalles_movimientos/ver_detalle_cambio').default);
 
 
 //cards

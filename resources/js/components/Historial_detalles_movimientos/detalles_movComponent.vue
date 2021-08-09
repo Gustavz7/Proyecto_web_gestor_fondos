@@ -3,6 +3,13 @@
         <b-modal
             v-model="modal_show"
             size="lg"
+            scrollable
+            centered
+            busy
+            hide-header-close
+            no-close-on-backdrop
+            no-close-on-esc
+            @show="date_format"
         >
             <!-- Encabezado & fecha -->
             <b-row>
@@ -11,8 +18,7 @@
                 </b-col>
                 <b-col cols="2">
                     <h5> Fecha: </h5>
-                    <p> {{fecha_DMY}} </p>
-                    <p> {{fecha_HMS}} </p>
+                    <p> {{ fecha_DMY }} <br> {{ fecha_HMS }}</p>
                 </b-col>
             </b-row>
             <!-- Titulo & monto (if: deposito, else: retiro) -->
@@ -55,18 +61,26 @@
                     </b-card>
                 </b-col>
             </b-row>
-
             <template #modal-footer>
-                <b-button @click="emitir_EstadoModal" variant="secondary"> volver</b-button>
-                <b-button @click="emitir_EstadoModal" variant="warning"> Editar Detalles</b-button>
+                <div>
+                    <b-button @click="cerrar_modal" variant="secondary"> volver</b-button>
+                    <b-button @click="modificar_detalles" variant="warning"> Editar Detalles</b-button>
+                    <b-button @click="ver_cambios" variant="transparent">
+                        <b-icon icon="clock-history" font-scale="2.0" variant="dark"></b-icon>
+                    </b-button>
+                </div>
             </template>
+            <editar_detalles_mov-component :modal2="modal_2" :info_item="info_movimiento" @default_modal2_event="cerrar_modal_2"/>
         </b-modal>
     </b-container>
 </template>
 
 <script>
+import Editar_detalles_mod from "./editar_detalles_mod";
+
 export default {
     name: "detalles_movComponent",
+    components: {Editar_detalles_mod},
     props: {
         mov_item: {
             default: "Ocurrio un error al trae los datos desde el padre",
@@ -82,28 +96,42 @@ export default {
             default_modal: false,
 
             //fechas DD/MM/YY & HH:MM:SS
-            fecha_DMY: "",
-            fecha_HMS: "",
+            fecha_DMY: null,
+            fecha_HMS: null,
+
+            //modal editar registro
+            modal_2: false,
+            info_movimiento: [],
         }
     },
     mounted() {
         console.log("******************** mounted Hijo *******************");
     },
     methods: {
-        emitir_EstadoModal() {
+        cerrar_modal() {
             const data_Modal = this.default_modal;
             this.$emit('default_modal_event', data_Modal);
-            console.log(this.mov_item);
         },
-    },
-    computed: {
-        date_test() {
-                console.log("computed hijo funcionando")
-                const fecha_all = new Date(this.mov_item.created_at);
-                this.fecha_DMY = fecha_all.toLocaleDateString();
-                this.fecha_HMS = fecha_all.toLocaleTimeString();
+        cerrar_modal_2(valor) {
+            this.modal_2 = valor;
+        },
+        date_format() {
+            const fecha_all = new Date(this.mov_item.created_at);
+            this.fecha_DMY = fecha_all.toLocaleDateString();
+            this.fecha_HMS = fecha_all.toLocaleTimeString();
+        },
+        modificar_detalles() {
+            console.log("modificar_detalles working");
+            this.modal_2 = true;
+            this.info_movimiento = this.mov_item;
+        },
+        ver_cambios() {
+            this.modal_2 = true;
+            console.log("modal ver cambios funcionando");
         }
-    }
+
+    },
+    computed: {}
 }
 </script>
 
