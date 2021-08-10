@@ -35,15 +35,16 @@
             </b-navbar-nav>
 
             <b-navbar-nav class="ml-auto">
-                <b-nav-item-dropdown righ >
+                <b-nav-item-dropdown text="Usuario & Sesion">
                 @guest
                     <!-- Si te estas logueando -->
                         @if (Route::has('login'))
-                            <b-nav-item href="{{ route('login') }}">{{ __('Login') }}</b-nav-item>
+                            <b-dropdown-item href="{{ route('login') }}">{{ __('Login') }}</b-dropdown-item>
                         @endif
-                    <!-- si te estas registrando -->
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <!-- si te estas registrando -->
                         @if (Route::has('register'))
-                            <b-nav-item href="{{ route('register') }}">{{ __('Register') }}</b-nav-item>
+                            <b-dropdown-item href="{{ route('register') }}"> {{ __('Register') }}</b-dropdown-item>
                         @endif
                     @else
                     <!-- si ya ingresaste al home -->
@@ -51,10 +52,23 @@
                             <em>{{ Auth::user()->name }}</em>
                         </template>
 
-                        <b-dropdown-item href="{{ url('/perfil') }}"> Ver Perfil</b-dropdown-item>
-                        <b-dropdown-item href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"> {{ __('Cerrar Sesion') }}
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <b-dropdown-item href="{{ url('/perfil') }}">
+                            <div class="text-dark"> Ver Perfil</div>
+                        </b-dropdown-item>
+
+                        <b-dropdown-divider></b-dropdown-divider>
+
+                        <b-dropdown-item
+                            variant="danger"
+                            href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            {{ __('Cerrar Sesion') }}
+
+                            <form id="logout-form"
+                                  action="{{ route('logout') }}"
+                                  method="POST"
+                                  class="d-none">
                                 @csrf
                             </form>
                         </b-dropdown-item>
@@ -64,7 +78,7 @@
         </b-collapse>
     </b-navbar>
 
-    <main class="py-0">
+    <main>
         @yield('content')
     </main>
 
@@ -74,7 +88,5 @@
 </html>
 
 <style scoped>
-    .dropdown-item{
-        color:black!important
-    }
+
 </style>

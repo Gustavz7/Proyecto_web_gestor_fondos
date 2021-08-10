@@ -140,4 +140,11 @@ export default {
 </script>
 
 <style scoped>
+a:link, a:visited {
+    color: #0018ff;
+}
+
+a:hover, a:active {
+    background-color: transparent;
+}
 </style>
