@@ -2,9 +2,9 @@
 
 <p> Este sistema full stack esta construido con las siguientes tecnologias:</p>
 <p> Para el lado del cliente (front-end)</p>
-<p> <h3><b> Vue.js </b> </h3></p>
+<p> <h2><b> Vue.js </b> </h2></p>
 <p> Para el lado del servidor (Back-end)</p>
-<p> <b> <h3>Laravel</h3> </b></p>
+<p> <b> <h2>Laravel</h2> </b></p>
 <p> Otros </p>
 <ul>
     <li> Vue-axios </li>
@@ -12,14 +12,14 @@
     <li> Boostrap-Vue </li>
 </ul>
 
-<p> Si deseas porbar el sistema sigue estos pasos:</p>
-<Ol>
+<p> Si deseas probar el sistema sigue estos pasos:</p>
+<ol>
     <li> Clona el repositorio </li>
     <li> Instala las dependencias de Composer </li>
     <li> Instala las dependencias de Node </li>
     <li> Ejecuta "php artisan serve" desde la raiz del proyecto</li>
     <li> Ve al navegador </li>
-</0l>
+</ol>
 <br>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
