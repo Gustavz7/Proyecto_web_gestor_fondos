@@ -71,16 +71,18 @@
                 </div>
             </template>
             <editar_detalles_mov-component :modal2="modal_2" :info_item="info_movimiento" @default_modal2_event="cerrar_modal_2"/>
+            <historial_cambios :info_item="info_movimiento" :modal3="modal_3" @default_modal3_event="cerrar_modal_3"/>
         </b-modal>
     </b-container>
 </template>
 
 <script>
 import Editar_detalles_mod from "./editar_detalles_mod";
+import Historial_cambios from "./historial_cambios";
 
 export default {
     name: "detalles_movComponent",
-    components: {Editar_detalles_mod},
+    components: {Historial_cambios, Editar_detalles_mod},
     props: {
         mov_item: {
             default: "Ocurrio un error al trae los datos desde el padre",
@@ -102,6 +104,9 @@ export default {
             //modal editar registro
             modal_2: false,
             info_movimiento: [],
+
+            //modal ver historial cambios
+            modal_3: false,
         }
     },
     mounted() {
@@ -115,19 +120,21 @@ export default {
         cerrar_modal_2(valor) {
             this.modal_2 = valor;
         },
+        cerrar_modal_3(valor) {
+            this.modal_3 = valor;
+        },
         date_format() {
             const fecha_all = new Date(this.mov_item.created_at);
             this.fecha_DMY = fecha_all.toLocaleDateString();
             this.fecha_HMS = fecha_all.toLocaleTimeString();
         },
         modificar_detalles() {
-            console.log("modificar_detalles working");
             this.modal_2 = true;
             this.info_movimiento = this.mov_item;
         },
         ver_cambios() {
-            this.modal_2 = true;
-            console.log("modal ver cambios funcionando");
+            this.modal_3 = true;
+            this.info_movimiento = this.mov_item;
         }
 
     },

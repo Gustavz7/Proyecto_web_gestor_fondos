@@ -1,7 +1,7 @@
 <template>
     <b-card
         border-variant="warning"
-        bg-variant="light"
+        bg-variant=""
         text-variant="dark"
         title=""
         style="

@@ -7,6 +7,7 @@ use App\Http\Controllers\EstadisticasConfigController;
 use App\Http\Controllers\fechaController;
 use App\Http\Controllers\MovimientosController;
 use App\Http\Controllers\apiController;
+use App\Http\Controllers\ModificacionesMovimientosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,9 +39,11 @@ Route::resource('/dinero_principal', DineroPrincipalController::class);
 Route::resource('/estadisticas', EstadisticasConfigController::class);
 //return fechas
 Route::resource('/fecha_actual', fechaController::class);
-//return de movimientos
+//return de movimientos & update
 Route::resource('/movimientos', MovimientosController::class);
 
+//return de historial de movimientos
+Route::resource('/movimientos_historial', ModificacionesMovimientosController::class);
 /**
  * API-REST
  */

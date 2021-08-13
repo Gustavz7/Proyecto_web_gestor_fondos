@@ -11,13 +11,14 @@
                  @show="date_format">
 
             <!-- Encabezado & fecha -->
-            <b-row>
+            <b-row align-h="center">
                 <b-col cols="8">
-                    <h1 class="text-left"> Editar informacion del registro </h1>
+                    <h2> Editar informacion del registro </h2>
                 </b-col>
-                <b-col cols="2">
-                    <h5> Fecha: </h5>
-                    <p> {{ fecha_DMY }} <br> {{ fecha_HMS }}</p>
+                <b-col cols="auto">
+                    <h4>Fecha</h4>
+                    <p class="texto-deshabilitado"> {{ fecha_DMY }} <br> {{ fecha_HMS }} <i
+                        class="fas fa-lock text-dark fa-x4"></i></p>
                 </b-col>
             </b-row>
 
@@ -25,9 +26,10 @@
             <b-row>
                 <b-col cols="8">
                     <b-card class="m-2"
+                            title="Titulo"
                             align="center">
                         <b-form-group id="titulo_2"
-                                      label="Titulo"
+                                      label=""
                                       label-for="input-titulo_2"
                                       description="">
                             <b-form-input
@@ -47,18 +49,22 @@
 
                 </b-col>
                 <b-col cols="4">
-                    <b-card v-if="info_item.tipo_movimiento"
-                            class="m-2"
-                            text-variant="success"
-                            align="center">
-                        <b-card-text><h4><b> $ +{{ info_item.monto }} </b></h4></b-card-text>
+                    <b-card
+                        title="Monto"
+                        class="m-2"
+                        align="center">
+                        <b-card-text class="texto-deshabilitado">
+                            <h4>
+                                <b v-if="info_item.tipo_movimiento" class="text-success"> $ +{{
+                                        info_item.monto
+                                    }} </b>
+                                <b v-else class="text-danger"> $ -{{ info_item.monto }} </b>
+                                <i class="fas fa-lock text-dark"></i>
+                            </h4>
+                        </b-card-text>
                     </b-card>
-                    <b-card v-else
-                            class="m-2"
-                            text-variant="danger"
-                            align="center">
-                        <b-card-text><h4><b>$ -{{ info_item.monto }} </b></h4></b-card-text>
-                    </b-card>
+
+
                 </b-col>
             </b-row>
 
@@ -66,6 +72,7 @@
             <b-row>
                 <b-col cols="8">
                     <b-card class="m-2 justify-content-center"
+                            title="Descripcion"
                             align="center">
                         <b-form-textarea id="descripcion"
                                          label="Descripcion"
@@ -74,7 +81,7 @@
                                          placeholder="Ingresa una descripcion a tu movimiento de al menos 10 caracteres"
                                          rows="4"
                                          size="sm"
-                                         :state="descripcion.length >= 10"
+                                         :state="descripcion_estado_2"
                                          required>
                         </b-form-textarea>
 
@@ -82,7 +89,8 @@
                 </b-col>
                 <b-col cols="4">
                     <b-card class="m-2"
-                            align="center">
+                            align="center"
+                            title="Imagen">
                         <b-form-group id="imagen"
                                       label=""
                                       label-for="input-imagen"
@@ -91,7 +99,7 @@
                                          accept=".jpg, .png, .gif"
                                          id="input-imagen"
                                          v-model="imagen"
-                                         placeholder="ingresar imagen"
+                                         placeholder="img file"
                                          browse-text="Explorar"
                             ></b-form-file>
 
@@ -103,8 +111,20 @@
             <template #modal-footer>
                 <div>
                     <b-button @click="cerrar_modal" variant="danger"> Cancelar</b-button>
-                    <b-button @click="" variant="success"> Aplicar Cambios</b-button>
+                    <b-button v-if="titulo_length &&
+                              descripcion_length"
+                              @click="agregar_cambios"
+                              variant="success">
+                        Aplicar Cambios
+                    </b-button>
+                    <b-button v-else
+                              disabled
+                              @click="agregar_cambios"
+                              variant="success">
+                        Aplicar Cambios
+                    </b-button>
                 </div>
+
             </template>
         </b-modal>
     </div>
@@ -127,19 +147,22 @@ export default {
     data: () => {
         return {
             default_modal: false,
+            titulo_length: false,
+            descripcion_length: false,
 
-            //MODIFICABLE
+            error: false,
+            error_msj: "error desde: editar_detalles_mod.vue",
 
+            /** Informacion del movimiento **/
             //NO MODIFICABLE
-            //fechas
             fecha_DMY: "",
             fecha_HMS: "",
-
-            //Informacion del movimiento
-            titulo: '',
-            descripcion: '',
+            //MODIFICABLE
+            titulo: "",
+            descripcion: "",
             imagen: null,
-            editado: false,
+            tipo_movimiento: "",
+            editado: "",
 
         }
     },
@@ -148,10 +171,7 @@ export default {
     },
     methods: {
         test() {
-            console.log("***** methods Hijo editar detalles ");
-            console.log(this.info_item);
-            console.log(this.modal2);
-
+            console.log("*****");
         },
         cerrar_modal() {
             const data_Modal = this.default_modal;
@@ -167,20 +187,86 @@ export default {
             const fecha_all = new Date(this.info_item.created_at);
             this.fecha_DMY = fecha_all.toLocaleDateString();
             this.fecha_HMS = fecha_all.toLocaleTimeString();
+
+            this.tipo_movimiento = this.info_item.tipo_movimiento;
+        },
+        validar_length() {
+            if (this.descripcion.length <= 9) {
+                this.descripcion_length = false;
+                this.titulo_length = false;
+            } else {
+                this.descripcion_length = true;
+                this.titulo_length = true;
+            }
+        },
+        agregar_cambios() {
+            this.editado = true;
+            if (this.descripcion_length && this.titulo_length) {
+                const params = {
+                    id_mov_original_upd: this.info_item.id,
+                    monto_upd: this.info_item.monto,
+                    titulo_upd: this.titulo,
+                    descripcion_upd: this.descripcion,
+                    imagen_upd: this.imagen,
+                    tipo_movimiento_upd: this.info_item.tipo_movimiento,
+                    editado_upd: this.editado
+                };
+                console.log(params);
+                axios
+                    .put(`/movimientos/${this.info_item.id}`, params)
+                    .then((response) => {
+                        this.error = false;
+                        const respuesta = response.data;
+                        console.log(respuesta);
+                    })
+                    .catch(error => {
+                        this.error = true;
+                        console.log(error);
+                    })
+                    .finally(() => {
+                        this.error = false;
+                        this.cerrar_modal();
+                    });
+                //peticion axios que guarda el cambio en una tabla y los acumula por su id
+                axios
+                    .post("/movimientos_historial", params)
+                    .then((response) => {
+                        const respuesta = response.data;
+                        console.log(respuesta);
+                    })
+                    .catch(error => {
+                        this.error = true;
+                        console.log(error);
+                    })
+                    .finally(() => {
+                        this.error = false;
+                    })
+            } else {
+                this.error = true;
+                console.log(this.error_msj);
+            }
+
         },
     },
     computed: {
         //validacion de la cantidad de caracteres de el campo titulo del formulario
         titulo_estado_2() {
-            if (this.titulo.length < 10) {
+            if (this.titulo.length <= 9) {
                 return false;
             }
         },
+        descripcion_estado_2() {
+            this.validar_length();
+            if (this.descripcion.length <= 9) {
+                return false;
+            }
+        }
     }
-
 }
 </script>
 
 <style scoped>
-
+.texto-deshabilitado {
+    opacity: 0.4;
+}
 </style>

@@ -21,7 +21,7 @@ class MovimientosController extends Controller
 
     public function store(Request $request)
     {
-        // crear y guardar la info que viene, y a traves del modelo guardarlo en la base de datos
+        //crear y guardar la info que viene, y a traves del modelo guardarlo en la base de datos
         $var_info_desc = new movimientos();
         $var_info_desc -> monto = $request -> monto_front;
         $var_info_desc -> titulo = $request -> titulo_front;
@@ -47,16 +47,16 @@ class MovimientosController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
-        /*$descripcion_info = descripcion_infos::find($id);
-        $descripcion_info -> titulo;
-        $descripcion_info -> descripcion = $request -> descripcion;
-        $descripcion_info -> tipo_movimiento;
-        $descripcion_info -> money;
-        $descripcion_info -> save();
+        $mov_update = movimientos::find($id);
+        $mov_update -> monto = $request -> monto_upd;
+        $mov_update -> titulo = $request -> titulo_upd;
+        $mov_update -> descripcion = $request -> descripcion_upd;
+        $mov_update -> imagen = $request -> imagen_upd;
+        $mov_update -> tipo_movimiento = $request -> tipo_movimiento_upd;
+        $mov_update -> editado = $request -> editado_upd;
+        $mov_update -> save();
 
-        return $descripcion_info;*/
-
+        return $mov_update;
     }
 
     public function destroy($id)

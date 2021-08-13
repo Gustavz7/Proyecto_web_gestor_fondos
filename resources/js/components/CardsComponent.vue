@@ -1,10 +1,10 @@
 <template>
-    <div class="row justify-content-center">
+    <b-container class="row justify-content-center">
         <CardAgregarDinero class="col-sm-auto"/>
         <CardRetirarDinero class="col-sm-auto"/>
         <CardEstadisticas class="col-sm-auto"/>
         <CardEmpty class="col-sm-auto"/>
-    </div>
+    </b-container>
 </template>
 
 <script>

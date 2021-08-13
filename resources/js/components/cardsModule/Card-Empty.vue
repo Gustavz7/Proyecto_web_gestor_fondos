@@ -1,7 +1,7 @@
 <template>
     <b-card
         border-variant="primary"
-        bg-variant="light"
+        bg-variant=""
         text-variant="dark"
         title=""
         style="
@@ -17,7 +17,7 @@
         class="m-2"
         body-class="text-center">
         <b-card-text>New functionality coming soon</b-card-text>
-        <b-button class="text-dark" href="#" variant="outline-primary"> Bloqueado</b-button>
+        <b-button class="text-dark" href="#" variant="outline-primary" disabled> Bloqueado</b-button>
     </b-card>
 </template>
 

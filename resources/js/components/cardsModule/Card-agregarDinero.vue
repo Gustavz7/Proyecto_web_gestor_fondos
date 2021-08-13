@@ -1,7 +1,7 @@
 <template>
     <b-card
         border-variant="success"
-        bg-variant="light"
+        bg-variant=""
         text-variant="dark"
         title=""
         style="
@@ -129,7 +129,7 @@ export default {
             titulo: '',
             monto: null,
             descripcion: '',
-            imagen: null,
+            imagen: "",
             tipo_movimiento: true, //#true(1)=Deposito #False(0)=Retiro
             editado: false
         }
