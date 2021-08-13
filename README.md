@@ -2,9 +2,9 @@
 
 <p> Este sistema full stack esta construido con las siguientes tecnologias:</p>
 <p> Para el lado del cliente (front-end)</p>
-<p> <b> Vue.js </b></p>
+<p> <h3><b> Vue.js </b> </h3></p>
 <p> Para el lado del servidor (Back-end)</p>
-<p> <b> Laravel </b></p>
+<p> <b> <h3>Laravel</h3> </b></p>
 <p> Otros </p>
 <ul>
     <li> Vue-axios </li>
@@ -13,7 +13,7 @@
 </ul>
 
 <p> Si deseas porbar el sistema sigue estos pasos:</p>
-<0l>
+<Ol>
     <li> Clona el repositorio </li>
     <li> Instala las dependencias de Composer </li>
     <li> Instala las dependencias de Node </li>
