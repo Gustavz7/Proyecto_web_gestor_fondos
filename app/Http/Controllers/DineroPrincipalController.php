@@ -10,7 +10,7 @@ class DineroPrincipalController extends Controller
 {
     public function index()
     {
-        $query = "SELECT monto_principal, moneda_principal FROM dinero_principals WHERE ID=1";
+        $query = "SELECT monto FROM movimientos";
         $fecha = DB::select("$query");
         return $fecha;
     }

@@ -18,7 +18,7 @@
         <b-card v-else align="center">
             <b-overlay :show="loading" rounded="sm">
                 <b-card-text class="texto_dinero_principal">
-                    {{ info_dinero.moneda_principal }} {{ info_dinero.monto_principal }}
+                    {{ monto_total }} {{tipo_moneda}}
                 </b-card-text>
             </b-overlay>
         </b-card>
@@ -31,10 +31,12 @@ export default {
     data: () => {
         return {
             info_dinero: [],
+            monto_total: 0,
             error_estado: false,
             loading: false,
             error: false,
             retry_btn: false,
+            tipo_moneda: "",
         }
     },
     mounted() {
@@ -47,7 +49,7 @@ export default {
                 .then((response) => {
                     this.loading = true;
                     this.error = false;
-                    this.info_dinero = response.data[0];
+                    this.info_dinero = response.data;
                 })
                 .catch(error => {
                     //console.log(error);
@@ -56,10 +58,24 @@ export default {
                 })
                 .finally(() => {
                     this.loading = false;
+                    this.sum_monto();
                 })
+        },
+        sum_monto(){
+            for (let item of this.info_dinero){
+                this.monto_total = this.monto_total + item.monto;
+                //console.log("item: ",item);
+                };
+            var formatter = new Intl.NumberFormat('en-US', {
+                 style: 'currency',
+                currency: 'CLP',
+            });
+            this.monto_total = formatter.format(this.monto_total);
         }
     },
-    computed: {}
+    computed: {
+        
+    }
 }
 </script>
 

@@ -16,8 +16,10 @@ import CardRetirarDinero from "./cardsModule/Card-RetirarDinero";
 export default {
     name: "cardsComponent",
     components: {CardRetirarDinero, CardAgregarDinero, CardEmpty, CardEstadisticas},
-    data() {
-        return {}
+    data:() => {
+        return {
+
+        }
     }
 
 }

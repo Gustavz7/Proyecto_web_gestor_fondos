@@ -1,9 +1,7 @@
 <template>
     <b-card
         border-variant="success"
-        bg-variant=""
         text-variant="dark"
-        title=""
         style="
             max-width: 16rem;
             max-height: 25rem;
@@ -40,7 +38,7 @@
                         <b-form-group id="monto"
                                       label="ingresa el monto a Depositar"
                                       label-for="input-monto"
-                                      description="">
+                                    >
                             <b-form-input
                                 id="input-monto"
                                 v-model="monto"
@@ -86,15 +84,14 @@
                                          placeholder="Ingresa una descripcion a tu movimiento de al menos 10 caracteres"
                                          rows="4"
                                          size="sm"
-                                         :state="descripcion.length >= 10"
+                                         :state="descripcion_estado"
                                          required >
                         </b-form-textarea>
                     </b-col>
                     <b-col>
                         <b-form-group id="imagen"
-                                      label=""
                                       label-for="input-imagen"
-                                      description="">
+                                      >
                             <b-form-file class="input_imagen"
                                          accept=".jpg, .png, .gif"
                                          id="input-imagen"
@@ -126,10 +123,10 @@ export default {
             show_retirar_dinero_btn: true,
 
             //Informacion del movimiento
-            titulo: '',
+            titulo: "",
             monto: null,
-            descripcion: '',
-            imagen: "",
+            descripcion: "",
+            imagen: null,
             tipo_movimiento: true, //#true(1)=Deposito #False(0)=Retiro
             editado: false
         }
@@ -146,28 +143,28 @@ export default {
                 tipo_movimiento_front: this.tipo_movimiento,
                 editado_front: this.editado
             };
-            axios.post('/add_movimiento', info_movimiento).then((response) => {
+            axios
+            .post('/add_movimiento', info_movimiento)
+            .then((response) => {
                 console.log(response.data);
-            });
-            this.titulo = '';
-            this.monto = null;
-            this.descripcion = '';
-            this.imagen = null;
+            })
+            .finally(() => {
+                    this.limpiar_form_add;
+                })
         },
         limpiar_form_add() {
-            this.titulo = '';
-            this.monto = null;
-            this.descripcion = '';
+            this.titulo = "";
+            this.monto = 0;
+            this.descripcion = "";
             this.imagen = null;
         }
     },
     computed: {
-        //validacion de la cantidad de caracteres de el campo titulo del formulario
+        //validacion de la cantidad de caracteres de los campos del formulario
         titulo_estado() {
             if (this.titulo.length < 10) {
                 return false;
             }
-
         },
         monto_estado() {
             if (this.monto < 0 || this.monto == 0 || this.monto == null) {
@@ -175,7 +172,13 @@ export default {
             } else {
                 return this.show_retirar_dinero_btn = true
             }
-        }
+        },
+        descripcion_estado() {
+            if (this.descripcion.length < 10) {
+                return false;
+            }
+
+        },
     },
     mounted() {
 

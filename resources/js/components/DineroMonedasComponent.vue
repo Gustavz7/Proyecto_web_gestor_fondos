@@ -75,6 +75,7 @@ export default {
         return {
             //info monto principal
             monto: null,
+            monto_total: 0,
 
             //peso_chileno
             peso: 'CLP',
@@ -107,10 +108,14 @@ export default {
             axios
                 .get('/dinero_principal')
                 .then((response) => {
+                    this.monto_total = 0;
+                    this.dinero_en_euros = 0;
+                    this.dinero_en_euros = 0;
+
                     this.alert = false;
                     this.loading = true;
                     this.error = false;
-                    this.monto = response.data[0];
+                    this.monto = response.data;
                 })
                 .catch(error => {
                     //console.log(error);
@@ -123,11 +128,37 @@ export default {
                     if (this.error) {
                         console.log("request error on DineroMonedasComponent");
                     } else {
-                        this.dinero_en_dolares = this.monto.monto_principal * this.intercambio_dolar;
-                        this.dinero_en_euros = this.monto.monto_principal * this.intercambio_euro;
                         this.loading = false;
+                        this.sum_monto();
                     }
                 })
+        },
+        sum_monto(){
+            for (let item of this.monto){
+                this.monto_total = this.monto_total + item.monto;
+                //console.log("item: ",item);
+                };
+            
+            var formatter_CLP = new Intl.NumberFormat('en-ES', {
+                style: 'currency',
+                currency: 'CLP'
+                });
+            var formatter_USD = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+                });
+            var formatter_EUR = new Intl.NumberFormat('en-ES', {
+                style: 'currency',
+                currency: 'EUR'
+                });
+
+            this.dinero_en_dolares = this.monto_total * this.intercambio_dolar;
+            this.dinero_en_euros = this.monto_total * this.intercambio_euro;
+
+            this.monto_total = formatter_CLP.format(this.monto_total);
+            this.dinero_en_dolares = formatter_USD.format(this.dinero_en_dolares);
+            this.dinero_en_euros = formatter_EUR.format(this.dinero_en_euros);
+
         }
     },
 }
