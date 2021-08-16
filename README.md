@@ -17,6 +17,8 @@
     <li> Clona el repositorio </li>
     <li> Instala las dependencias de Composer </li>
     <li> Instala las dependencias de Node </li>
+    <li> Revisa el archivo .env </li>
+    <li> Ejecuta las migraciones </li>
     <li> Ejecuta "php artisan serve" desde la raiz del proyecto</li>
     <li> Ve al navegador </li>
 </ol>
