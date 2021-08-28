@@ -2,16 +2,25 @@
     <div>
         <!-- esta tarjeta se mostrara si no hay errores en la request axios -->
         <b-card v-if="error" align="center">
-            <b-card-text class="error_dinero_principal">
-                Error al cargar la información
-            </b-card-text>
-            <b-button @click="api_request_monto" variant="primary">
+
+            <b-card-text>
+
+                <b-row>
+                <b-col cols="4">
+                    <p class="error_dinero_principal">Error al cargar la información </p>
+                </b-col>
+                <b-col cols="4">
+                    <b-button @click="api_request_monto" variant="primary">
                 Reintentar
                 <b-icon
                     icon="arrow-clockwise"
                     variant="light">
                 </b-icon>
             </b-button>
+                </b-col>
+
+            </b-row>
+            </b-card-text>
         </b-card>
 
         <!-- esta tarjeta se mostrara si hay errores en la request axios -->
@@ -63,9 +72,13 @@ export default {
         },
         sum_monto(){
             for (let item of this.info_dinero){
-                this.monto_total = this.monto_total + item.monto;
+                if (item.tipo_movimiento){
+                    this.monto_total = this.monto_total + item.monto;
+                }else{
+                    this.monto_total = this.monto_total - item.monto;
+                }
                 //console.log("item: ",item);
-                };
+                }
             var formatter = new Intl.NumberFormat('en-US', {
                  style: 'currency',
                 currency: 'CLP',
@@ -74,7 +87,7 @@ export default {
         }
     },
     computed: {
-        
+
     }
 }
 </script>

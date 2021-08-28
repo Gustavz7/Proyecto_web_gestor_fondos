@@ -1,10 +1,15 @@
 <template>
     <div>
-        <Chart v-bind="info_estadisticas, dat_fecha"> No se pudo mostrar el grafico</Chart>
-        <p> info desde chart padre: {{info_estadisticas}}</p>
-        <p v-for="item in dat_fecha">
-            fecha: {{ item.created_at }}
-        </p>
+        <Chart v-if="ready"
+               :valores_1="values"
+               :fechas="dates"
+               :valores_2="values_2"
+               class="chart"
+        > No se pudo mostrar el grafico</Chart>
+        <div v-else>
+            <b-spinner variant="primary" type="border"></b-spinner>
+            <p>Consultando datos...</p>
+        </div>
     </div>
 </template>
 
@@ -15,23 +20,36 @@ export default {
     name: 'estadisticasChart',
     components: {Chart},
     data: () => ({
-        info_estadisticas: [],
-        dat_fecha: [],
-    }),
-    async created() {
-        axios.get('/estadisticas').then((response) => {
-            this.info_estadisticas = response.data;
-            console.log("info_estadisticas (desde estadisticasChart.vue):");
-            console.log(this.info_estadisticas);
-        });
-        axios.get('/fecha_actual').then((response) => {
-            console.log("info_fecha (desde estadisticasChart.vue):");
-            this.dat_fecha = response.data;
-            console.log(this.dat_fecha[0].created_at);
-        });
-    },
-    mounted() {
+        data_all: [],
 
+        values: [],
+        values_2:[],
+        dates: [],
+
+        ready: false,
+    }),
+    created() {
+
+    },
+    async mounted() {
+        this.ready = false;
+        const response = await axios.get('/estadisticas');
+        this.data_all = response.data;
+
+        for (let item of this.data_all) {
+            const fecha = new Date(item.created_at).toLocaleDateString();
+            this.dates.push(fecha);
+            if(item.tipo_movimiento){
+                this.values.push(item.monto);
+                this.values_2.push(null)
+            }else{
+                this.values_2.push(item.monto);
+                this.values.push(null)
+            }
+
+        }
+        this.ready = true;
+        console.log(this.data_all, this.values, this.dates);
     },
 
 
@@ -42,5 +60,6 @@ export default {
 .cont {
     justify-content: center;
 }
-
+.chart{
+}
 </style>

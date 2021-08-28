@@ -12,7 +12,7 @@ class EstadisticasConfigController extends Controller
     {
         //return estadisticas_config::all();
 
-        $posts = DB::select('SELECT monto FROM movimientos');
+        $posts = DB::select('SELECT monto, created_at, tipo_movimiento FROM movimientos');
         return $posts;
 
     }

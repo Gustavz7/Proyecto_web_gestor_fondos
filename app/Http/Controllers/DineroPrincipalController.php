@@ -10,7 +10,7 @@ class DineroPrincipalController extends Controller
 {
     public function index()
     {
-        $query = "SELECT monto FROM movimientos";
+        $query = "SELECT monto, tipo_movimiento FROM movimientos";
         $fecha = DB::select("$query");
         return $fecha;
     }

@@ -1,30 +1,27 @@
-
 <script>
 import {Line} from 'vue-chartjs'
 
 export default {
     extends: Line,
-    props: ['info_est', 'dat_fecha'],
+    props: ['valores_1', 'fechas', 'valores_2'],
     data() {
         return {
             //Data del componenete
 
-
             //Config Grafico
             datacollection: {
-                labels: ['1'
-                ],
+                labels: this.fechas,
                 datasets: [
                     {
                         label: 'Deposito',
-                        data: [65500, 59000, 80000, 81340, 56100, 55230, 40450],
+                        data: this.valores_1,
                         fill: false,
                         borderColor: 'rgb(37,172,0)',
                         tension: 0.0
                     },
                     {
                         label: 'Retiro',
-                        data: [23000, 34000, 34000, 9000, 100, 100, null, 10000, null, 21000, 23000],
+                        data: this.valores_2,
                         fill: false,
                         borderColor: 'rgb(172,0,0)',
                         tension: 0.0
@@ -58,7 +55,7 @@ export default {
                     position: 'top',
                     color: '#CF1717'
                 },
-                responsive: false,
+                responsive: true,
                 aspectRatio: 0,
                 maintainAspectRatio: false,
                 layout: {},
